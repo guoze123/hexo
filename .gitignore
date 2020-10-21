@@ -3,3 +3,6 @@
 
 # Ada Library Information
 *.ali
+/gz_blog/node_modules
+/gz_blog/public
+
