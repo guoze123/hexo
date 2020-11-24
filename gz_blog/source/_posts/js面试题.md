@@ -2,6 +2,7 @@
 title: js面试题
 date: 2020-10-22 11:05:28
 tags: js面试题
+categories: js面试题
 ---
 ## == 操作符的强制类型转换规则
 

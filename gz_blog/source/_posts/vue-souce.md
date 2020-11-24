@@ -278,13 +278,13 @@ function createComputedGetter (key) {
 
 ## 7.`Watch`中的`deep:true` 是如何实现的
 
-### 理解:
+### 理解
 
 - 当用户指定了`watch`中的deep属性为`true`时，如果当前监控的值是数组类型。会对对象中的每一项进行求值，此时会将当前`watcher`存入到对应属性的依赖中，这样数组中对象发生变化时也会通知数据更新
 
-## 原理:
+### 原理
 
-```javascript
+``` javascript
 get () {
     pushTarget(this) // 先将当前依赖放到 Dep.target上
     let value
@@ -332,7 +332,7 @@ function _traverse (val: any, seen: SimpleSet) {
 
 ## 8.`Vue`组件的生命周期
 
-### 理解:
+### 理解
 
 #### 要掌握每个生命周期什么时候被调用
 
@@ -353,11 +353,11 @@ function _traverse (val: any, seen: SimpleSet) {
 - `updated` 可以执行依赖于 DOM 的操作。然而在大多数情况下，你应该避免在此期间更改状态，因为这可能会导致更新无限循环。 该钩子在服务器端渲染期间不被调用。
 - `destroyed` 可以执行一些优化操作,清空定时器，解除绑定事件
 
-![](lifecycle.png)
+![lifecycle](lifecycle.png)
 
-### 原理:
+### 原理
 
-![](生命周期.png)
+![生命周期](生命周期.png)
 
 ## 9.`ajax`请求放在哪个生命周期中
 

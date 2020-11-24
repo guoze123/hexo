@@ -26,6 +26,7 @@ categories:
 *https://pan.baidu.com/s/1hsivfN2*
 
 ### 3.跑通react开发环境
+
 ```
 $ npm install create-react-app -g
 $ create-react-app <project-name>
@@ -343,7 +344,8 @@ class Input extends Component{
 ```
 
 #### 受控组件
-```
+
+``` javascript
 class Sum extends Component{
     constructor(){
         super();
@@ -353,7 +355,7 @@ class Sum extends Component{
     // e表示的是事件源
     handleChange(key,e){ //处理多个输入框的值映射到状态的方法
         this.setState({
-            [key]:parseInt(e.target.value)||0
+            [key]:parseInt(e.target.value) || 0
         })
     }
     render(){
@@ -369,7 +371,8 @@ class Sum extends Component{
 ```
 
 #### 非受控组件
-```
+
+``` javascript
 class Sum extends Component{
     constructor(){
         super();
@@ -395,9 +398,9 @@ class Sum extends Component{
 }
 ```
 
+### 18.生命周期
 
-### 18.声明周期
-```
+``` javascript
 class Counter extends React.Component{ // 他会比较两个状态相等就不会刷新视图 PureComponent是浅比较
   static defaultProps = {
     name:'珠峰培训'
@@ -477,8 +480,5 @@ class ChildCounter extends Component{
 // componentWillUnmount
 ```
 
-![lifeCycle](http://son.fullstackjavascript.cn/lifeCycle.png)
-
-### 19.评论面板
-### 20.React实现百度搜索框
-### 21.react轮播图考试
+![lifeCycle](react15.png)
+![lifeCycle](react16.3.png)
