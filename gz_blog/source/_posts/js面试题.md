@@ -29,7 +29,7 @@ categories: js面试题
 * 箭头函数中没有自己的THIS,THIS是上下文中的THIS
 * 在小括号表达式中，会影响THIS的指向
 * 使用call/apply/bind可以改变this指向
-
+<!-- more -->
 ## 面试题集
 
 * [面试题1](https://mp.weixin.qq.com/s?__biz=MzAxODE4MTEzMA==&mid=2650081252&idx=1&sn=1fedc422a3806fa1f9c3faf31bb2a20b&chksm=83db9a81b4ac1397132de99ebdbdbdad57dcc6785d0b8fe1a5ee2b57dbb960b0fbf65015c3ca&scene=126&sessionid=1603760808&key=54ce6b15dc70fa94e4cee849718a95dcb45463880bfbf73a52f6e49f4e4a65fb8adec9e1c54df8bf81bfa1d78626a8537229cc36083224e425c795f892103475ca5f06542d47eec5dabc5d55c77dc7f9fabc4524bbc83cf94060d9236d1061a0fa026db04b47ae38fdfd65662df5549a11d6cd60ff371f5492081a022254d0e7&ascene=1&uin=MjQ4OTg5MDk4MQ%3D%3D&devicetype=Windows+10+x64&version=6300002f&lang=zh_CN&exportkey=AXrZ8Ft8M%2FkmfXMdRQOHyYs%3D&pass_ticket=Kkp6C7aNRW%2BSS3CyH29rTpuzIryrfuzR2BkuJOMPRmZ73lUqRYKqbJR1nz5SlRhp&wx_header=0)

@@ -32,7 +32,7 @@ $ npm install create-react-app -g
 $ create-react-app <project-name>
 $ cd <project-name> && npm start
 ```
-
+<!-- more -->
 > 默认会自动安装React,react由两部分组成,分别是:
 
 - react.js 是 React 的核心库
