@@ -43,3 +43,30 @@ categories: js 代码片段
 
 计算font-size的逻辑是：
 当设计图是1920时,规定HTML的FONT-SIZE的值是100. 也就是,当浏览器窗口调整到1920PX时,1REM=100PX,如果要设定一个160PX(1920设计图时)的margin-top,那么REM设置值是1.6rem.
+
+## 深拷贝
+``` javascript
+function deepClone(origin, hashMap = new WeakMap()) {
+    if (origin == undefined || typeof origin !== 'object') {
+        return origin
+    }
+
+    if (origin instanceof Date) {
+        return new Date(origin)
+    }
+    if (origin instanceof RegExp) {
+        return new RegExp(origin)
+    }
+    let hashKey = hashMap.get(origin);
+    if (hashKey) {
+        return hashKey
+    }
+    let target = new origin.constructor()
+    hashMap.set(origin, target)
+    for (const k in origin) {
+        if (origin.hasOwnProperty(k)) {
+            target[k] = deepClone(origin[k])
+        }
+    }
+}
+```
