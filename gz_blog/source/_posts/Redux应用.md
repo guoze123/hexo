@@ -11,7 +11,7 @@ categories:
 我们一直通过属性来进行组件中的数据传递,这种模式是非常脆弱的。在日常的开发中经常会遇到非父子组件传递的场景。原来的方式是找到共同的父级进行数据交互，这时通信就变得比较麻烦
 我们先通过一个简单的例子实现一下redux的工作模式:
 ### 1).统一数据管理
-```
+``` js
 let state = {
   title:{color:'red',text:'标题'},
   content:{color:'green',text:'内容'}
@@ -36,7 +36,7 @@ renderApp();
 > 这里我们可以将renderContent,renderTitle看成两个组件将所需的数据提取到state中统一进行管理。当渲染后我们希望更改状态，封装更改状态的方法(dispatch)
 <!-- more -->
 ### 2).实现dispatch
-```
+``` js
 let CHANGE_TITLE_TEXT = 'CHANGE_TITLE_TEXT';
 function dispatch(action) {
   switch (action.type){
@@ -53,7 +53,7 @@ setTimeout(()=>{
 > 不要直接更改状态而是使用dispatch方法进行状态的更改,派发一个带有type的属性来进行状态的更改，但是依然无法阻止用户更改状态.
 
 ### 3).createStore的实现
-```
+``` js
 let CHANGE_TITLE_TEXT = 'CHANGE_TITLE_TEXT';
 function createStore() {
   let state = {
@@ -98,7 +98,7 @@ setTimeout(()=>{
 > 我们将状态放到了createStore函数中，目的是隔离作用域，并且再内部返回深度克隆的对象，这样用户无法再通过外界更改状态。但是状态应该由我们自身来控制，应该是外界传入的，所以要将状态拿出createStore。并且判断的逻辑也应该由我们自己来编写
 
 ### 4).reducer的实现
-```
+``` js
 const CHANGE_TITLE_TEXT = 'CHANGE_TITLE_TEXT';
 function createStore(reducer) {
   let state;
@@ -129,7 +129,7 @@ function reducer(state=initState,action) {
 > 此时我们已将需要自己处理的逻辑提取出来，但是我们每次dispatch时都需要自己触发视图的更新,我们希望采用发布订阅来实现。
 
 ### 5).订阅函数
-```
+``` js
 function createStore(reducer) {
   let state;
   let listeners = []; // 放置所有订阅的函数
@@ -159,7 +159,7 @@ setTimeout(()=>{
 
 > 此时我们redux中常用的方法已经封装完成！^_^,我们将封装好的逻辑抽离成redux.js
 
-```
+``` javascript
 function createStore(reducer) {
   let state;
   let listeners = []; // 放置所有订阅的函数
@@ -185,7 +185,7 @@ function createStore(reducer) {
 
 
 ## 2.应用redux+js实现counter
-```
+``` JavaScript
 <p id="container"></p>
 <button id="add">+</button>
 <button id="minus">-</button>
@@ -221,7 +221,7 @@ function createStore(reducer) {
 > 由此我们使用了自己的redux库链接了原生js进行使用。
 
 ## 3.应用redux+react实现counter
-```
+``` Javascript
 import React,{Component} from 'react'
 import ReactDOM,{render} from 'react-dom';
 import {createStore} from './redux'
