@@ -257,7 +257,71 @@ ReactDOM.render(<Counter/>,window.root);
 
 ### 16.复合组件
 复合组件就是将多个组件进行组合，结构非常复杂时可以把组件分离开
+#### 不具名
+``` javascript
+import React, { Component } from "react";
+import TopBar from "../components/TopBar";
+import BottomBar from "../components/BottomBar";
+export default class Layout extends Component {
+  componentDidMount() {
+    const { title = "商城" } = this.props;
+    document.title = title;
+  }
+  render() {
+    const { children, showTopBar, showBottomBar } = this.props;
+    console.log("children", children);
+    return (
+      <div>
+        {showTopBar && <TopBar />}
+        {children.content}
+        {children.txt}
+        <button onClick={children.btnClick}>button</button>
+        {showBottomBar && <BottomBar />}
+      </div>
+    );
+  }
+}
 
+import React, { Component } from "react";
+import Layout from "./Layout";
+export default class UserPage extends Component {
+  render() {
+    return (
+      <Layout showTopBar={true} showBottomBar={true} title="⽤用户中⼼心">
+        <div>
+          <h3>UserPage</h3>
+        </div>
+      </Layout>
+    );
+  }
+}
+
+```
+#### 具名（传个对象进去）
+``` js
+import React, { Component } from "react";
+import Layout from "./Layout";
+export default class HomePage extends Component {
+  render() {
+    return (
+      <Layout showTopBar={false} showBottomBar={true} title="商城⾸首⻚页">
+        {{
+          content: (
+            <div>
+              <h3>HomePage</h3>
+            </div>
+          ),
+          txt: "这是个⽂文本",
+          btnClick: () => {
+            console.log("btnClick");
+          },
+        }}
+      </Layout>
+    );
+  }
+}
+
+```
 #### 父子组件的通信
 ```
 class Panel extends Component{
@@ -405,6 +469,9 @@ class Counter extends React.Component{ // 他会比较两个状态相等就不�
   static defaultProps = {
     name:'珠峰培训'
   };
+  static propTypes = {
+    name: String,
+  }
   constructor(props){
     super();
     this.state = {number:0}
@@ -479,6 +546,27 @@ class ChildCounter extends Component{
 // 卸载
 // componentWillUnmount
 ```
-
+#### 16.3 之前的
 ![lifeCycle](react15.png)
+#### 16.3 之后的
 ![lifeCycle](react16.3.png)
+V17可能会废弃的三个⽣生命周期函数⽤用getDerivedStateFromProps替代，⽬目前使⽤用的话加上UNSAFE_：
++ componentWillMount
++ componentWillReceiveProps
++ componentWillUpdate
+引⼊入两个新的⽣生命周期函数：
+* static getDerivedStateFromProps
+    getDerivedStateFromProps 会在调⽤用 render ⽅方法之前调⽤用，并且在初始挂载及后续更更新时都会被
+    调⽤用。它应返回⼀一个对象来更更新 state，如果返回 null 则不不更更新任何内容。
+    请注意，不不管原因是什什么，都会在 每次 渲染前触发此⽅方法。这与UNSAFE_componentWillReceiveProps 形成对⽐比，后者仅在⽗父组件重新渲染时触发，而不不是在内部调⽤用  setState 时。
+* getSnapshotBeforeUpdate
+    getSnapshotBeforeUpdate(prevProps, prevState)
+    在render之后，在componentDidUpdate之前
+    getSnapshotBeforeUpdate() 在最近⼀一次渲染输出（提交到 DOM 节点）之前调⽤用。它使得组件能
+在发⽣生更更改之前从 DOM 中捕获⼀一些信息（例例如，滚动位置）。此⽣生命周期的任何返回值将作为参数传
+递给  componentDidUpdate(prevProps, prevState, snapshot) 
+
+如果不不想⼿手动给将要废弃的⽣生命周期添加  UNSAFE_ 前缀，可以⽤用下⾯面的命令。
+``` cmd
+npx react-codemod rename-unsafe-lifecycles <path>
+```

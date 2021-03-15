@@ -1,6 +1,6 @@
 ---
 title: js 代码片段
-date: 2020-10-22 11:05:28
+date: 2020-10-29 11:05:28
 tags: js 代码片段
 categories: js 代码片段
 ---
@@ -68,5 +68,29 @@ function deepClone(origin, hashMap = new WeakMap()) {
             target[k] = deepClone(origin[k])
         }
     }
+}
+```
+
+## js 原有的 toFixed 函数得到结果并非 想要的 需要自己重新定义
+``` javascript
+function toFixed(number, m) {
+    if (typeof number !== 'number') {
+        throw new Error("number不是数字");
+    }
+    let result = Math.round(Math.pow(10, m) * number) / Math.pow(10, m);
+    result = String(result);
+    if (result.indexOf(".") == -1) {
+        if(m != 0){
+            result += ".";
+            result += new Array(m + 1).join('0');
+        }
+    } else {
+        let arr = result.split('.');
+        if (arr[1].length < m) {
+            arr[1] += new Array(m - arr[1].length + 1).join('0')
+        }
+        result = arr.join('.')
+    }
+    return result
 }
 ```
