@@ -34,8 +34,11 @@ categories: js面试题
 ## case语句是使用恒等（===）来判断的
 
 ## 正则 test 方法的参数如果不是字符串，会经过抽象 ToString操作强制转成字符串
+
 ## JSON.stringify 拷贝时obj 的缺陷
+
 ![JSON.stringify](json.stringify.png)
+
 * 拷贝的对象的值中如果有函数、undefined、symbol 这几种类型，经过 JSON.stringify 序列化之后的字符串中这个键值对会消失
 * 拷贝 Date 引用类型会变成字符串
 * 无法拷贝不可枚举的属性
@@ -45,10 +48,13 @@ categories: js面试题
 * 无法拷贝对象的循环应用，即对象成环 (obj[key] = obj)
 
 ## js 常见的6中继承方式
+
  ![JavaScript继承](继承.png)
-* 原型链继承 
+
+* 原型链继承
     介绍：子类的原型指向父类构造的实例
     缺点： 原型属性共享问题
+
     ``` javascript
     function Parent1() {
     this.name = "parent1";
@@ -64,8 +70,10 @@ categories: js面试题
     s1.play.push(4);
     console.log(s1.play, s2.play);
     ```
+
 * 构造函数继承
     缺点：只能继承父类的实例属性和方法，不能继承原型属性或者方法
+
     ``` javascript
     function Parent1(){
     this.name = 'parent1';
@@ -85,8 +93,10 @@ categories: js面试题
     // Child1 { name: 'parent1', type: 'child1' }
     console.log(child.getName());  // 会报错 child.getName is not a function
     ```
+
 * 组合继承
     缺点：父类函数会多次执行
+
     ``` javascript
     function Parent3 () {
 
@@ -128,8 +138,10 @@ categories: js面试题
     console.log(s4.getName()); // 正常输出'parent3'
 
     ```
+
 * 原型式继承
     缺点：多个实例的引用类型属性指向相同的内存，存在篡改的可能
+
     ``` js
         let parent4 = {
             name: "parent4",
@@ -162,37 +174,48 @@ categories: js面试题
         console.log(person5.friends);
         // ["p1", "p2", "p3","jerry","lucy"]
     ```
+
 * 寄生式继承
 * 寄生组合继承
     寄生组合式继承方式，基本可以解决前几种继承方式的缺点，较好地实现了继承想要的结果，同时也减少了构造次数，减少了性能的开销
+
     ``` JavaScript
     function clone(parent, child) {
-    // 这里改用 Object.create 就可以减少组合继承中多进行一次构造的过程
-    child.prototype = Object.create(parent.prototype);
-    child.prototype.constructor = child;
+        // 这里改用 Object.create 就可以减少组合继承中多进行一次构造的过程
+        child.prototype = Object.create(parent.prototype);
+        child.prototype.constructor = child;
     }
     function Parent6() {
-    this.name = "parent6";
-    this.play = [1, 2, 3];
+        this.name = "parent6";
+        this.play = [1, 2, 3];
     }
 
     Parent6.prototype.getName = function () {
-    return this.name;
+     return this.name;
     };
     function Child6() {
-    Parent6.call(this);
-    this.friends = "child5";
+        Parent6.call(this);
+        this.friends = "child5";
     }
 
     clone(Parent6, Child6);
     Child6.prototype.getFriends = function () {
-    return this.friends;
+        return this.friends;
     };
     let person6 = new Child6();
     console.log(person6);
     console.log(person6.getName());
     console.log(person6.getFriends());
     ```
+
+## js 原型链
+
+![js原型链](js原型链.png)
+
+* 每个函数都有  `prototype` 属性，除了  `Function.prototype.bind()` 该属性指向原型。该属性的值是一个堆内存，堆内存中默认自带一个属性`constructor`,值是函数本身。
+* 每个对象都有 `__proto__`属性，指向了创建该对象的构造函数的原型。
+* 对象可以通过 `__proto__`来寻找不属于该对象的属性， `__proto__` 将对象连接起来组成了原型链。
+  
 ## 面试题集
 
 * [面试题1](https://mp.weixin.qq.com/s?__biz=MzAxODE4MTEzMA==&mid=2650081252&idx=1&sn=1fedc422a3806fa1f9c3faf31bb2a20b&chksm=83db9a81b4ac1397132de99ebdbdbdad57dcc6785d0b8fe1a5ee2b57dbb960b0fbf65015c3ca&scene=126&sessionid=1603760808&key=54ce6b15dc70fa94e4cee849718a95dcb45463880bfbf73a52f6e49f4e4a65fb8adec9e1c54df8bf81bfa1d78626a8537229cc36083224e425c795f892103475ca5f06542d47eec5dabc5d55c77dc7f9fabc4524bbc83cf94060d9236d1061a0fa026db04b47ae38fdfd65662df5549a11d6cd60ff371f5492081a022254d0e7&ascene=1&uin=MjQ4OTg5MDk4MQ%3D%3D&devicetype=Windows+10+x64&version=6300002f&lang=zh_CN&exportkey=AXrZ8Ft8M%2FkmfXMdRQOHyYs%3D&pass_ticket=Kkp6C7aNRW%2BSS3CyH29rTpuzIryrfuzR2BkuJOMPRmZ73lUqRYKqbJR1nz5SlRhp&wx_header=0)
