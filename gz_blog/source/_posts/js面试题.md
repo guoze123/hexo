@@ -4,6 +4,12 @@ date: 2020-10-29 11:05:28
 tags: js面试题
 categories: js面试题
 ---
+# html
+
+# css
+
+# javascript
+
 ## == 操作符的强制类型转换规则
 
 * 字符串和数字之间的相等比较，将字符串转换为数字之后再进行比较
@@ -215,8 +221,72 @@ categories: js面试题
 * 每个函数都有  `prototype` 属性，除了  `Function.prototype.bind()` 该属性指向原型。该属性的值是一个堆内存，堆内存中默认自带一个属性`constructor`,值是函数本身。
 * 每个对象都有 `__proto__`属性，指向了创建该对象的构造函数的原型。
 * 对象可以通过 `__proto__`来寻找不属于该对象的属性， `__proto__` 将对象连接起来组成了原型链。
-  
-## 面试题集
+
+## 定时器为什么不是精确的
+
+## JS 的各种位置，比如 clientHeight,scrollHeight,offsetHeight ,以及 scrollTop, offsetTop,clientTop 的区别？
+
+* clientHeight：表示的是可视区域的高度，不包含 border 和滚动条
+* offsetHeight：表示可视区域的高度，包含了 border 和滚动条
+* scrollHeight：表示了所有区域的高度，包含了因为滚动被隐藏的部分
+* clientTop：表示边框 border 的厚度，在未指定的情况下一般为 0
+* scrollTop：滚动后被隐藏的高度，获取对象相对于由 offsetParent 属性指定的父坐标(css定位的元素或 body 元素)距离顶端的高度。
+
+# DOM
+
+# BOM
+
+# vue
+
+## vuex的原理和理解
+
+# react
+
+## state如何注入组件，从redux到组件经历的过程
+
+## react 最新的生命周期
+
+React 16之后有三个⽣命周期被废弃(但并未删除)
+
+* componentWillMount
+* componentWillReceiveProps
+* componentWillUpdate
+计划在17版本完全删除这三个函数，只保留UNSAVE_前缀的三个函数，⽬的是为了向下兼容，但是对于开发者⽽⾔应该尽量避免使⽤他们，⽽是使⽤新增的⽣命周期函数替代它们
+
+最新的⽣命周期分为三个阶段,分别是挂载阶段、更新阶段、卸载阶段
+
+* 挂载阶段
+  * constructor: 构造函数，最先被执⾏,我们通常在构造函数⾥初始化state对象或者给⾃定义⽅法绑定this
+  * getDerivedStateFromProps: static getDerivedStateFromProps(nextProps, prevState) ,这是个静态⽅法,当我们接收到新的属性想去修改我们state，可以使⽤getDerivedStateFromProps
+  * render: render函数是纯函数，只返回需要渲染的东⻄，不应该包含其它的业务逻辑,可以返回原⽣的DOM、React组件、Fragment、Portals、字符串和数字、Boolean和null等内容
+  * componentDidMount: 组件装载之后调⽤，此时我们可以获取到DOM节点并操作，⽐如对canvas，svg的操作，服务器请求，订阅都可以写在这个⾥⾯，但是记得在componentWillUnmount中取消订阅
+* 更新阶段
+  * getDerivedStateFromProps: 此⽅法在更新个挂载阶段都可能会调⽤
+  * shouldComponentUpdate: shouldComponentUpdate(nextProps, nextState) ,有两个参数nextProps和nextState，表示新的属性和变化之后的state，返回⼀个布尔值，true表示会触发重新渲染，false表示不会触发重新渲染，默认返回true,我们通常利⽤此⽣命周期来优化React程序性能
+  * render: 更新阶段也会触发此⽣命周期
+  * getSnapshotBeforeUpdate: getSnapshotBeforeUpdate(prevProps, prevState) , 这 个 ⽅ 法 在 render 之 后 ，componentDidUpdate之前调⽤，有两个参数prevProps和prevState，表示之前的属性和之前的state，这个函数有⼀个返回值，会作为第三个参数传给componentDidUpdate，如果你不想要返回值，可以返回null，此⽣命周期必须与componentDidUpdate搭配使⽤
+  * componentDidUpdate: componentDidUpdate(prevProps, prevState, snapshot) ,该⽅法在getSnapshotBeforeUpdate⽅法之后被调⽤，有三个参数prevProps，prevState，snapshot，表示之前的props，之前的state，和snapshot。第三个参数是getSnapshotBeforeUpdate返回的,如果触发某些回调函数时需要⽤到 DOM 元素的状态，则将对⽐或计算的过程迁移⾄ getSnapshotBeforeUpdate，然后在 componentDidUpdate 中统⼀触发回调或更新状态。
+* 卸载阶段
+
+## setState 是同步还是异步
+
+## react 组件的通信
+
+## react 优化手段
+
+# node
+
+# webpack
+
+# 数据结构
+
+# 前端安全和工程化
+
+# 前端性能优化
+
+# 计算机基础
+
+# 面试题集
 
 * [面试题1](https://mp.weixin.qq.com/s?__biz=MzAxODE4MTEzMA==&mid=2650081252&idx=1&sn=1fedc422a3806fa1f9c3faf31bb2a20b&chksm=83db9a81b4ac1397132de99ebdbdbdad57dcc6785d0b8fe1a5ee2b57dbb960b0fbf65015c3ca&scene=126&sessionid=1603760808&key=54ce6b15dc70fa94e4cee849718a95dcb45463880bfbf73a52f6e49f4e4a65fb8adec9e1c54df8bf81bfa1d78626a8537229cc36083224e425c795f892103475ca5f06542d47eec5dabc5d55c77dc7f9fabc4524bbc83cf94060d9236d1061a0fa026db04b47ae38fdfd65662df5549a11d6cd60ff371f5492081a022254d0e7&ascene=1&uin=MjQ4OTg5MDk4MQ%3D%3D&devicetype=Windows+10+x64&version=6300002f&lang=zh_CN&exportkey=AXrZ8Ft8M%2FkmfXMdRQOHyYs%3D&pass_ticket=Kkp6C7aNRW%2BSS3CyH29rTpuzIryrfuzR2BkuJOMPRmZ73lUqRYKqbJR1nz5SlRhp&wx_header=0)
 * [面试题2](https://mp.weixin.qq.com/s?__biz=MzUyNDYxNDAyMg==&mid=2247486750&idx=1&sn=d7e13a8393b83ac330d9b48690428c0e&chksm=fa2bedf7cd5c64e19fcafbe4dab742b65cfe168ad567f3f799b5fc229a35710eb4164084897c&scene=126&sessionid=1602725812&key=6664ac14267ba66883c13581e1d9e62b3ffc7ddfc44d1984c762bde82d19131986d5d9af50595ab1d798e16e45eddd68ded75929bfc6217a87ec0dcacb393b0aa10b53bcd066f65c7865905a425d129f9f1f110464e3a8faa5601a1b7a192f46240134dd033c0bacd43e93b0b51701140f106a0a52acfaabf76e8fee9f2cae06&ascene=1&uin=MjQ4OTg5MDk4MQ%3D%3D&devicetype=Windows+10+x64&version=6300002f&lang=zh_CN&exportkey=Adc0WAca8bFpyYT3RtaxAjo%3D&pass_ticket=gNZw604QfgMyZ5MfqQB17Zb9G0KO%2Fy%2FGpe3%2BUhEBieJBkyQwt1xU8LnZyQLLT598&wx_header=0)
