@@ -96,7 +96,7 @@ function toFixed(number, m) {
     return result
 }
 ```
-
+<!-- more -->
 ## bind 实现
 
 * 箭头函数的 this 永远指向它所在的作用域，函数作为构造函数用 new 关键字调用时，不应该改变其 this 指向，因为 new绑定 的优先级高于 显示绑定 和 硬绑定

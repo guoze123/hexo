@@ -232,6 +232,97 @@ categories: js面试题
 * clientTop：表示边框 border 的厚度，在未指定的情况下一般为 0
 * scrollTop：滚动后被隐藏的高度，获取对象相对于由 offsetParent 属性指定的父坐标(css定位的元素或 body 元素)距离顶端的高度。
 
+## 箭头函数和普通函数的区别?
+
+* 箭头函数没有自己的this，只能通过作用域链来向上查找离自己最近的那个函数的this
+
+* 箭头函数不能作为constructor，因此不能通过new 来调用，所以它并没用new.target这个属性
+
+* 箭头函数没有argument属性，可以通过rest可以获取
+  
+* 箭头函数不能直接使用call和apply，bind来改变this
+  
+* 箭头函数不能使用yield，不能作为generator函数
+  
+* 箭头函数语法比普通函数更加简洁
+  
+* ES6 为 new 命令引入了一个 new.target 属性，该属性一般用在构造函数之中，返回new命令作用于的那个构造函数或构造方法。如果构造函数不是通过new命令或Reflect.construct()调用的，new.target会返回undefined，因此这个属性可以用来确定构造函数时怎样调用的。包括super也不存在以及原型prototype ---- 因为在执行new的时候需要将函数的原型赋值给实力对象的原型属性。
+
+## TypeScript里面有哪些JavaScript没有的类型?
+
+``` javascript
+相比较JavaScript，TypeScript独有的类型
+any
+声明为any的变量可以赋予任意类型的值
+
+tuple
+元组类型用来表示已知元素数量和类型的数组，个元素的类型不必相同，对应位置的类型需要一样
+
+let x: [string, number];
+x = [‘string’, 0]; // 正常
+x = [0, ‘string’]; // 报错
+enum
+枚举类型用于定义值集合
+
+enum Color {
+    Red,
+    Green,
+    Blue,
+}
+let c: Color = Color.Green;
+console.log©; // 1
+void 标识方法返回值的类型，表示方法没有返回值。
+function hello(): void {}
+never
+never是其它类型(包括null和undefined)的子类型，是不会发生的类型。例如，never总是抛出异常或永不返回的异常的函数表达式的返回类型
+
+// 返回 never 的函数终点不可达
+function error(message: string): never {
+throw new Error(message);
+}
+
+// 推断的返回类型是 never
+function fail() {
+return error(‘Something failed’);
+}
+
+// 返回 never 的函数终点不可达
+function infiniteLoop(): never {
+while (true) {}
+}
+unknown 未知类型，一般在使用后再手动转具体的类型
+
+union
+
+联合类型，多种类型之一
+
+string | number; // string 或 number
+intersection
+交叉类型，多种类型合并
+
+{ a: string; } & { b: number; } // => { a: string; b: number }
+Generics
+泛型
+
+interface Backpack {
+add: (obj: T) => void;
+get: () => T;
+}
+```
+
+## 对 URL 进行编码/解码的实现方式
+
+* ：escape和unescape:
+escape()不能直接用于URL编码，它的真正作用是返回一个字符的Unicode编码值
+除了ASCII字母、数字、标点符号"@ * _ + - . /"以外，对其他所有字符进行编码。在u0000到u00ff之间的符号被转成%xx的形式，其余符号被转成%uxxxx的形式。对应的解码函数是unescape()。
+* ：encodeURL和decodeURL：
+encodeURI()是Javascript中真正用来对URL编码的函数。
+它用于对URL的组成部分进行个别编码，除了常见的符号以外，对其他一些在网址中有特殊含义的符号"; / ? : @ & = + $ , #"，也不进行编码。编码后，它输出符号的utf-8形式，并且在每个字节前加上%。
+它对应的解码函数是decodeURI()
+* ：encodeURLComponent和decodeURLComponent:
+与encodeURI()的区别是，它用于对整个URL进行编码。"; / ? : @ & = + $ , #"，这些在encodeURI()中不被编码的符号，在encodeURIComponent()中统统会被编码。
+它对应的解码函数是decodeURIComponent()
+
 # DOM
 
 # BOM
@@ -279,6 +370,13 @@ React 16之后有三个⽣命周期被废弃(但并未删除)
 # webpack
 
 # 数据结构
+
+# http 请求
+
+## 请求在客户端报413是什么错误,怎么解决呢?
+
+* HTTP 413 错误(Request entity too large 请求实体太大)，就是客户端发送的实体主体部分比服务器能够或者希望处理的要大时，会出现这样的错误。一般上传文件时会出现这样的错误概率比较大。
+  解决方案可以修改服务器的配置文件。配置客户端请求大小和缓存大小
 
 # 前端安全和工程化
 
